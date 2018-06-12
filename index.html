@@ -46,10 +46,75 @@
 				<section data-markdown>
 					<script type="text/template">
 					## Plan
+					- Introduction to JavaScript
 					- What allows prototype pollution ?
 					- How can it be exploited ?
 					- Mitigation &amp; Other consideration
 					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+					<script type="text/template">
+					## Intro to JavaScript
+
+					- Class declaration in JavaScript
+
+					```js
+ function Dog() {
+ 	
+ }
+ 
+ Dog.prototype.talk = function () {
+ 	return 42;
+ }
+ 
+ var myDog = new Dog();
+ myDog.talk(); // returns 42
+					```
+
+					</script>
+					</section>
+					
+					<section data-markdown>
+					<script type="text/template">
+					## Intro to JavaScript
+
+					- Base properties of Object
+
+					```js
+ var myDog = new Dog();
+ 
+ // Points to the function "Dog"
+ myDog.constructor; 
+ 
+ // Points to the class definition of "Dog"
+ myDog.constructor.prototype;
+ 
+ // Points to the class definition of "Dog"
+ myDog.__proto__;
+ 					```
+
+ 					</script>
+ 					</section>
+
+					<section data-markdown>
+					<script type="text/template">
+					## Intro to JavaScript
+
+					- Property access
+
+					```js
+ var myDog = new Dog();
+ var name = "__proto__";
+
+ myDog["__proto__"] === myDog.__proto__; 
+ myDog[name] === myDog.__proto__;
+ myDog["toString"] === myDog.toString;
+ 					```
+
+					</script>
+					</section>
 				</section>
 
 				<section>
@@ -467,7 +532,7 @@ module.exports.setTemplate =
 					- Using Map instead of Object.
 					- Added in ES6.
 					- The usage of Object as a key-value structure is problematic.
-					- Object come with a lot of default key.
+					- Objects come with a lot of default key.
 					- Modification of the ES standard can introduce vulnerability in your code.
 
 					</script>
